@@ -13,7 +13,7 @@ else()
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic")
 endif()
 
-add_library(${PROJECT_NAME} cpumem_monitor.h cpumem_monitor.cpp)
+add_library(${PROJECT_NAME} cpumem_monitor.h)
 
 install (TARGETS ${PROJECT_NAME}  
 	RUNTIME DESTINATION bin
