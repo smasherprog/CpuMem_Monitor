@@ -24,7 +24,8 @@ int main(int argc, char *argv[])
     std::srand(std::time(nullptr));
     SL::NET::CPUMemMonitor mon;
     std::thread runner;
-
+    std::cout << std::fixed;
+    std::cout << std::setprecision(2);
     std::thread th([&]() {
         auto counter = 0;
         while (counter++ < 20) {
