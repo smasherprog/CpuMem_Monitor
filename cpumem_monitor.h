@@ -7,6 +7,8 @@
 #include <pdh.h>
 #include <psapi.h>
 #include <tchar.h>
+#pragma comment(lib, "pdh")
+
 #elif __APPLE__
 
 #elif __linux__
