@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <thread>
+#include <vector>
 
 using namespace std::chrono_literals;
 int gocpugo()
@@ -28,6 +29,7 @@ int main(int argc, char *argv[])
     std::cout << std::setprecision(2);
     std::thread th([&]() {
         auto counter = 0;
+        std::vector<char> mem;
         while (counter++ < 20) {
             auto memusage = mon.getMemoryUsage();
             auto cpuusage = mon.getCPUUsage();
@@ -44,6 +46,26 @@ int main(int argc, char *argv[])
                     }
                     std::cout << "---Done with busy work in this process---" << std::endl;
                 });
+            }
+            if (counter == 10) {
+                std::cout << "Allocating 20 more MBs" << std::endl;
+                mem.reserve(mem.capacity() + static_cast<size_t>(1024 * 1024 * 20));
+            }
+            if (counter == 11) {
+                std::cout << "Allocating 20 more MBs" << std::endl;
+                mem.reserve(mem.capacity() + static_cast<size_t>(1024 * 1024 * 20));
+            }
+            if (counter == 12) {
+                std::cout << "Allocating 20 more MBs" << std::endl;
+                mem.reserve(mem.capacity() + static_cast<size_t>(1024 * 1024 * 20));
+            }
+            if (counter == 13) {
+                std::cout << "Allocating 20 more MBs" << std::endl;
+                mem.reserve(mem.capacity() + static_cast<size_t>(1024 * 1024 * 20));
+            }
+            if (counter == 14) {
+                std::cout << "Deallocating the memory" << std::endl;
+                mem.shrink_to_fit();
             }
         }
     });
