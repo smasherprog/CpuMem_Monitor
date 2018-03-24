@@ -1,0 +1,40 @@
+image: Visual Studio 2017
+
+platform:
+- x86
+- x64
+
+configuration:
+  - Debug
+  - Release
+  
+environment:
+  matrix:
+  - SHARED: OFF
+    POSTFIXNAME: MT
+    POSTVCPKGNAME: -static
+    
+matrix:
+  fast_finish: true
+
+install:  
+  - mkdir deps
+  - cd deps
+  - set CMAKE_URL="https://cmake.org/files/v3.10/cmake-3.10.1-win64-x64.zip"
+  - appveyor DownloadFile %CMAKE_URL% -FileName cmake.zip
+  - 7z x cmake.zip
+  - move cmake-* cmake # Move to a version-agnostic directory
+  - set PATH=%cd%\cmake\bin;%PATH%
+  - cmake --version
+  - cd ..
+  - mkdir build
+  - cd build
+
+build_script:
+  - cd C:\projects\socket-lite\build\
+  - if %platform%==x86 set generator=Visual Studio 15 2017
+  - if %platform%==x64 set generator=Visual Studio 15 2017 Win64
+  - cmd: echo %generator% %SHARED% %configuration% 
+  - cmd: cmake -G"%generator%" -DBUILD_SHARED_LIBS=%SHARED% .. 
+  - cmd: cmake --build .  --config %configuration%
+  - ctest -C %configuration% -V 
