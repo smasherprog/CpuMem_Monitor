@@ -16,6 +16,9 @@ int gocpugo()
     }
     volatile auto count1 = 0;
     for (volatile auto i = 0; i < count; i++) {
+#if !_WIN32
+        asm("");//prevent compiler from optimizing busy work away
+#endif
         count1 += 1;
     }
     return count1;
