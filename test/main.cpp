@@ -34,8 +34,14 @@ int main(int argc, char *argv[])
             auto memusage = mon.getMemoryUsage();
             auto cpuusage = mon.getCPUUsage();
             std::cout << "Total CPU Usage: " << cpuusage.TotalUse << std::endl;
-            std::cout << "Total Process Usage: " << cpuusage.ProcessUse << std::endl;
-            std::cout << "Total Physical Process Memory Usage: " << SL::NET::to_PrettyBytes(memusage.PhysicalProcessUsed) << std::endl;
+            std::cout << "Total CPU Process Usage: " << cpuusage.ProcessUse << std::endl;
+            std::cout << "Physical Process Memory Usage: " << SL::NET::to_PrettyBytes(memusage.PhysicalProcessUsed) << std::endl;
+            std::cout << "Total Physical Process Memory Available: " << SL::NET::to_PrettyBytes(memusage.PhysicalTotalAvailable) << std::endl;
+            std::cout << "Total Physical Memory Usage: " << SL::NET::to_PrettyBytes(memusage.PhysicalTotalUsed) << std::endl;
+            std::cout << "Virtual Process Memory Usage: " << SL::NET::to_PrettyBytes(memusage.VirtualProcessUsed) << std::endl;
+            std::cout << "Total Virtual Process Memory Usage: " << SL::NET::to_PrettyBytes(memusage.VirtualTotalAvailable) << std::endl;
+            std::cout << "Total Virtual Process Memory Usage: " << SL::NET::to_PrettyBytes(memusage.VirtualTotalUsed) << std::endl;
+
             std::this_thread::sleep_for(1s);
             if (counter == 5) {
                 std::cout << "---Starting busy work in this process---" << std::endl;
