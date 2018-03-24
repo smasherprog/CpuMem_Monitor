@@ -73,6 +73,7 @@ int main(int argc, char *argv[])
                 std::cout << "Deallocating the memory" << std::endl;
                 mem.shrink_to_fit();
             }
+
         }
     });
     th.join();

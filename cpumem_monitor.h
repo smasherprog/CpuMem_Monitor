@@ -28,7 +28,7 @@ inline std::string to_PrettyBytes(long long int bytes)
 {
     static auto convlam = [](const auto a_value, const int n) {
         std::ostringstream out;
-        out << std::setprecision(n) << a_value;
+        out <<std::fixed << std::setprecision(n) << a_value;
         return out.str();
     };
 
@@ -149,6 +149,7 @@ class CPUMemMonitor
 {
 private:
     long long int parseLine(char *line) {
+
         // This assumes that a digit will be found and the line ends in " Kb".
         int i = strlen(line);
         const char *p = line;
@@ -162,9 +163,9 @@ private:
         FILE *file = fopen("/proc/self/status", "r");
         char line[128];
         while (fgets(line, 128, file) != NULL && (m.VirtualProcessUsed == 0 || m.PhysicalProcessUsed == 0)) {
-            if (m.VirtualProcessUsed == 0 && strncmp(line, "VmSize:", 7) == 0) {
+            if (strncmp(line, "VmSize:", 7) == 0) {
                 m.VirtualProcessUsed = parseLine(line);
-            } else if (m.PhysicalProcessUsed == 0 && strncmp(line, "VmRSS:", 6) == 0) {
+            } else if (strncmp(line, "VmRSS:", 6) == 0) {
                 m.PhysicalProcessUsed = parseLine(line);
             }
         }
