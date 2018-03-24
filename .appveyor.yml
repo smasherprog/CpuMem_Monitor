@@ -27,9 +27,8 @@ install:
   - set PATH=%cd%\cmake\bin;%PATH%
   - cmake --version
   - cd ..
-  - mkdir build
-  - cd build
-
+  - mkdir build 
+  
 build_script:
   - cd build
   - if %platform%==x86 set generator=Visual Studio 15 2017
