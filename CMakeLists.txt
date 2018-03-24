@@ -24,6 +24,6 @@ install (FILES
 	cpumem_monitor.h 
 	DESTINATION include
 )
-
+enable_testing() 
 add_subdirectory(test)
 
