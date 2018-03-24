@@ -3,8 +3,7 @@ project(cpumem_monitor)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-option(BUILD_EXAMPLE "Build example" ON)
+set(CMAKE_CXX_EXTENSIONS OFF) 
 option(BUILD_SHARED_LIBS "Build shared library" OFF) 
 
 if(MSVC)
@@ -26,7 +25,5 @@ install (FILES
 	DESTINATION include
 )
 
-if(BUILD_EXAMPLE)
-  add_subdirectory(Test)
-endif()
+add_subdirectory(test)
 
