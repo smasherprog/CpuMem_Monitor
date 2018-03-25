@@ -8,20 +8,7 @@
 #include <vector>
 
 using namespace std::chrono_literals;
-#pragma optimize("", off)
-int gocpugo()
-{
-    volatile auto count = std::rand();
-    if (count < 1000000) {
-        count = 1000000;
-    }
-    volatile auto count1 = 0;
-    for (volatile auto i = 0; i < count; i++) {
-        count1 += 1;
-    }
-    return count1;
-}
-#pragma optimize("", on)
+
 int main(int argc, char *argv[])
 {
     std::srand(std::time(nullptr));
@@ -49,11 +36,11 @@ int main(int argc, char *argv[])
                 std::cout << "---Starting busy work in this process---" << std::endl;
                 runner = std::thread([&]() {
                     auto start = std::chrono::high_resolution_clock::now();
-                    int c = 0;
+                    auto waited=0;
                     while (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now() - start).count() < 5) {
-                        c += gocpugo();
+                        waited +=1;
                     }
-                    std::cout << "---Done with busy work in this process---" << c << std::endl;
+                    std::cout << "---Done with busy work in this process---" << waited<< std::endl;
                 });
             }
             if (counter == 10) {
