@@ -1,6 +1,8 @@
 #pragma once
 #include <iomanip>
+#include <math.h>
 #include <sstream>
+#include <string.h>
 #include <string>
 
 #ifdef WIN32
@@ -12,8 +14,6 @@
 #elif __APPLE__
 
 #elif __linux__
-#include <math.h>
-#include <string.h>
 #include <sys/sysinfo.h>
 #include <sys/times.h>
 #include <sys/types.h>
