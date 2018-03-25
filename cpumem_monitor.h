@@ -148,6 +148,22 @@ namespace NET {
     };
 #elif __APPLE__
 
+    class CPUMemMonitor {
+
+      public:
+        CPUMemMonitor() {}
+        ~CPUMemMonitor() {}
+        CPUUse getCPUUsage()
+        {
+            CPUUse c = {0};
+            return c;
+        }
+        MemoryUse getMemoryUsage()
+        {
+            MemoryUse m = {0};
+            return m;
+        }
+    };
 #elif __linux__
 
     class CPUMemMonitor {
