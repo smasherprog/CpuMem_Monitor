@@ -237,23 +237,21 @@ namespace SL {
                 double percent; 
                 unsigned long long totalUser, totalUserLow, totalSys, totalIdle, total;
 
-                auto file = fopen("/proc/stat", "r");
-                if (file) { 
-                    fscanf(file, "cpu %llu %llu %llu %llu", &totalUser, &totalUserLow, &totalSys, &totalIdle);
-                    fclose(file);
-                }
+            file = fopen("/proc/stat", "r");
+            fscanf(file, "cpu %llu %llu %llu %llu", &totalUser, &totalUserLow, &totalSys, &totalIdle);
+            fclose(file);
 
-                if (totalUser < lastTotalUser || totalUserLow < lastTotalUserLow || totalSys < lastTotalSys || totalIdle < lastTotalIdle) {
-                    // Overflow detection. Just skip this value.
-                    percent = -1.0;
-                }
-                else {
-                    total = (totalUser - lastTotalUser) + (totalUserLow - lastTotalUserLow) + (totalSys - lastTotalSys);
-                    percent = total;
-                    total += (totalIdle - lastTotalIdle);
-                    percent /= total;
-                    percent *= 100.0;
-                }
+            if (totalUser < lastTotalUser || totalUserLow < lastTotalUserLow || totalSys < lastTotalSys || totalIdle < lastTotalIdle) {
+                // Overflow detection. Just skip this value.
+                percent = -1.0;
+            }
+            else {
+                total = (totalUser - lastTotalUser) + (totalUserLow - lastTotalUserLow) + (totalSys - lastTotalSys);
+                percent = total;
+                total += (totalIdle - lastTotalIdle);
+                percent /= total;
+                percent *= 100.0;
+            }
 
                 lastTotalUser = totalUser;
                 lastTotalUserLow = totalUserLow;
